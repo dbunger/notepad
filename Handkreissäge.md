@@ -13,6 +13,7 @@
 - 70mm Schnitttiefe, scheinbar älterer Bestseller ... gutes Preis/Leistungsverhältnis?
 - 2013, Klassiker?, mit Staubabsaugung, bis 45° Gehrung
 - Sägeblätter kaufen: 30mm Lochdurchmesser, 190mm Außenumfang, Lieferumfang 16 Zähne (2 608 641 184), [mehr ...](https://www.bosch-professional.com/de/de/optiline-wood-kreissaegeblaetter-2592814-ocs-ac/#anchor-product-table), z.B. 60 Zähne (2 608 641 188), oder 12/16/24/36/48/60 ...
+- Reduzierring (2 600 100 220) um kleinere Blätter aufzusetzen, für 30mm Loch ist 190 das kleinste, ... aber ist Quatsch, ich kann ja die Schnitttiefe einstellen ...
 
 ### GKS 55+
 
