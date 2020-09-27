@@ -7,10 +7,20 @@
 - PKS 55 + 66 beide gut
 ## Professional
 - mehr [Führungsschienen](https://www.bosch-professional.com/de/de/fuehrungsschienensysteme-2493000-ocs-c/), 80-310cm, 52-199€
-- GKS 190, 70mm Schnitttiefe, scheinbar älterer Bestseller ... gutes Preis/Leistungsverhältnis?
--- 2013, Klassiker?, mit Staubabsaugung, bis 45° Gehrung
-- GKS 55+, 63mm, 
--- GCE == plus ConstantSpeed, scheinbar nicht so laut, Leerlaufdrehzahl variiert, mehr Watt
+
+### GKS 190
+
+- 70mm Schnitttiefe, scheinbar älterer Bestseller ... gutes Preis/Leistungsverhältnis?
+- 2013, Klassiker?, mit Staubabsaugung, bis 45° Gehrung
+- Sägeblätter kaufen: 30mm Lochdurchmesser, 190mm Außenumfang, Lieferumfang 16 Zähne (2 608 641 184), [mehr ...](https://www.bosch-professional.com/de/de/optiline-wood-kreissaegeblaetter-2592814-ocs-ac/#anchor-product-table), z.B. 60 Zähne (2 608 641 188), oder 12/16/24/36/48/60 ...
+
+### GKS 55+
+
+- 63mm, 
+- GCE == plus ConstantSpeed, scheinbar nicht so laut, Leerlaufdrehzahl variiert, mehr Watt
+
+### GKS 65+85
+
 - GKS 65, 65mm
 - GKS 85, 85mm, kein GCE, G == kompatibel für Führunggschiene
 - nur 1 Tauchsäge in Professional, DIY gar keine, GKT 55 GCE, 57mm, 313€
