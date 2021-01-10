@@ -49,3 +49,28 @@ gci -Directory -Recurse |
     mkdir -Verbose "E:\Fotos_2020\$_" 
   }
 ```
+
+## Verify checksum
+
+```
+$CHECKSUMFILE="D:\Daniel\__\Fotos_2020_Zusammenstellung\Fotos_2020_2021-01-10.sha256"; $COUNT_ALL=(gc "$CHECKSUMFILE"|measure).Count; 
+
+$i=0; $err=0; gc "$CHECKSUMFILE" | %{
+  $SPL=("$_" -split " .\\")
+  $CHECKSUM=$SPL[0]
+  $FILE=$SPL[1]
+  $CHECKSUM_TO_VERIFY=(Get-FileHash -Algorithm SHA256 "E:\$FILE").Hash
+  $_
+  $CHECKSUM
+  $CHECKSUM_TO_VERIFY
+  if ($CHECKSUM -ne $CHECKSUM_TO_VERIFY) {
+    "Alaaaarm: $FILE has saved checksum $CHECKSUM and computed $CHECKSUM_TO_VERIFY"
+    $_ | Out-File -Append "checksum_2020.error"
+    $err=$err+1
+  } else {
+    $FILE | Out-File -Append "checksum_2020.success"
+  }
+  $i=$i+1
+  Write-Progress -Activity "Doing Fotos_2020 ($err errors so far ...)" -Status "$i of $COUNT_ALL completed" -PercentComplete ($i*100/$COUNT_ALL)
+}
+```
