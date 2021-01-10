@@ -3,7 +3,7 @@
 
 ## Get all files
 
-```
+```csharp
 Get-ChildItem -File -Recurse |
   Where-Object Length -gt 10000 |
   Resolve-Path -Relative
