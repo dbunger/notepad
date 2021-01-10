@@ -56,12 +56,12 @@ gci -Directory -Recurse |
 $CHECKSUMFILE="D:\Daniel\__\Fotos_2020_Zusammenstellung\Fotos_2020_2021-01-10.sha256"; $COUNT_ALL=(gc "$CHECKSUMFILE"|measure).Count; 
 
 $i=0; $err=0; gc "$CHECKSUMFILE" | %{
+  $_
   $SPL=("$_" -split " .\\")
   $CHECKSUM=$SPL[0]
   $FILE=$SPL[1]
-  $CHECKSUM_TO_VERIFY=(Get-FileHash -Algorithm SHA256 "E:\$FILE").Hash
-  $_
   $CHECKSUM
+  $CHECKSUM_TO_VERIFY=(Get-FileHash -Algorithm SHA256 "E:\$FILE").Hash
   $CHECKSUM_TO_VERIFY
   if ($CHECKSUM -ne $CHECKSUM_TO_VERIFY) {
     "Alaaaarm: $FILE has saved checksum $CHECKSUM and computed $CHECKSUM_TO_VERIFY"
