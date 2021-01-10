@@ -15,7 +15,7 @@ Just hit Shift+Enter.
 
 ## Calculate checksum
 
-```
+```vbnet
 Get-ChildItem -File -Path .\Fotos_2020\ -Recurse |
   Where-Object Length -gt 10000 |
   Resolve-Path -Relative |
