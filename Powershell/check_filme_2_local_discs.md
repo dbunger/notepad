@@ -1,76 +1,41 @@
 
-# Check / Verify Fotos 2020 photo backup
+## Mirror folder on 2 local usb drives
 
-## Get all files
-
-```
-Get-ChildItem -File -Recurse |
-  Where-Object Length -gt 10000 |
-  Resolve-Path -Relative
-```
-
-## Powershell multi line enter
-
-Just hit Shift+Enter.
-
-## Calculate checksum
+ - Get file list
+ - Record files with delta in error log file
+ - Store successes in file
+ - Repeat until _all files_ are equal to _success files_ 
 
 ```
-Get-ChildItem -File -Path .\Fotos_2020\ -Recurse |
-  Where-Object Length -gt 10000 |
+$SOURCE_DIR="\\Diskstation\usbshare1-2\Daten_Krokodil\Filme"
+$TARGET_DIR="\\Diskstation\usbshare2-2\Daten_Krokodil_on_Papagei\Filme"
+
+$LOG_DIR="C:\Users\gewin"
+
+cd "$SOURCE_DIR"; gci -File -Recurse |
   Resolve-Path -Relative |
-  Sort-Object | %{
-  $FILE="$_"
-  $CHECKSUM=(Get-FileHash -Algorithm SHA256 "$FILE").Hash
-  Write-Output "$CHECKSUM $FILE"
-  "$CHECKSUM $FILE" | Out-File -Append Fotos_2020_2021-01-10.sha256
-}
-```
+  Out-File -Append "$LOG_DIR\check_filme.all"
 
-## Reminder "Check max items per folder"
+cp "$LOG_DIR\check_filme.all" "$LOG_DIR\check_filme.todo"
 
-```
-gci -Recurse -Depth 1 -Directory |
-  Resolve-Path -Relative | %{
-    echo "$_"
-    $c=(gci -Depth 1 -Path "$_" -File | measure).count
-    echo $c
-    if ($c -gt 999) {
-      echo ">>Alaaaarm: 1u1 max 3K Files pro Ordner: "$_" ("$c")<<<<"
-    }
-  }
-```
-
-## Reminder "Create folder structure"
-
-```
-gci -Directory -Recurse | 
-  Resolve-Path -Relative | %{ 
-    mkdir -Verbose "E:\Fotos_2020\$_" 
-  }
-```
-
-## Verify checksum
-
-```
-$CHECKSUMFILE="D:\Daniel\__\Fotos_2020_Zusammenstellung\Fotos_2020_2021-01-10.sha256"; $COUNT_ALL=(gc "$CHECKSUMFILE"|measure).Count; 
-
-$i=0; $err=0; gc "$CHECKSUMFILE" | %{
-  $_
-  $SPL=("$_" -split " .\\")
-  $CHECKSUM=$SPL[0]
-  $FILE=$SPL[1]
-  $CHECKSUM
-  $CHECKSUM_TO_VERIFY=(Get-FileHash -Algorithm SHA256 "E:\$FILE").Hash
-  $CHECKSUM_TO_VERIFY
-  if ($CHECKSUM -ne $CHECKSUM_TO_VERIFY) {
-    "Alaaaarm: $FILE has saved checksum $CHECKSUM and computed $CHECKSUM_TO_VERIFY"
-    $_ | Out-File -Append "checksum_2020.error"
-    $err=$err+1
+cd "$SOURCE_DIR"; gc "$LOG_DIR\check_filme.todo" | % {
+  $FILE=$_
+  $FILE
+  $SOURCE_CHECKSUM=(Get-FileHash -Algorithm SHA256 "$SOURCE_DIR\$FILE").Hash
+  $SOURCE_CHECKSUM
+  $TARGET_CHECKSUM=(Get-FileHash -Algorithm SHA256 "$TARGET_DIR\$FILE").Hash
+  $TARGET_CHECKSUM
+  if ($SOURCE_CHECKSUM -ne $TARGET_CHECKSUM) {
+    $FILE | Out-File -Append "$LOG_DIR\check_filme.error"
+    "Problem with $FILE"
   } else {
-    $FILE | Out-File -Append "checksum_2020.success"
+    "All good with $FILE"
+    $FILE | Out-File -Append "$LOG_DIR\check_filme.ok"
   }
-  $i=$i+1
-  Write-Progress -Activity "Doing Fotos_2020 ($err errors so far ...)" -Status "$i of $COUNT_ALL completed" -PercentComplete ($i*100/$COUNT_ALL)
 }
+  
+((compare -ReferenceObject (gc "$LOG_DIR\check_filme.todo") -DifferenceObject (gc "$LOG_DIR\check_filme.ok")) | Where-Object -Property SideIndicator -EQ '<=').InputObject | %{ "$_" | Out-File -Append "$LOG_DIR\check_filme.next" }
+
+rm "$LOG_DIR\check_filme.todo"; mv "$LOG_DIR\check_filme.next" "$LOG_DIR\check_filme.todo"
+
 ```
