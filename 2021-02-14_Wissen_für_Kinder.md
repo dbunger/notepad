@@ -7,4 +7,4 @@
 
 ### ZDF Schule
 
-(https://www.zdf.de/dokumentation/terra-x/terra-x-plus-schule-100.html)
+(https://schule.zdf.de)
