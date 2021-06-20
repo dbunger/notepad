@@ -3,3 +3,5 @@
 * Zadie Smith
 * Isabel Allende, Im Reich des Goldenen Drachen
   * Abenteuerroman, Jugendbibliothek
+* Americana, Don Delillo, weiss nicht so Recht ...
+* Das Haus ohne Türen, Christian Dörge
