@@ -5,3 +5,4 @@
   * Abenteuerroman, Jugendbibliothek
 * Americana, Don Delillo, weiss nicht so Recht ...
 * Das Haus ohne Türen, Christian Dörge
+* Zombigida, Christian von Aster, Zombies, Pegida, Experiment, etwas trashig
